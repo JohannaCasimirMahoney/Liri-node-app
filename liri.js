@@ -31,7 +31,7 @@ switch (user) {
         break;
 }
 
-// All the functions for the keys
+// BandsInTown function
 
 function searchForBandsInTown(artist) {
     var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
@@ -52,6 +52,8 @@ function searchForBandsInTown(artist) {
         console.log(error);
     });
 }
+
+// Spotify Function
 
 function spotifyThisSong(song) {
     spotify
@@ -90,3 +92,39 @@ function errorConditionForSpotify() {
         });
 }
 
+// Movie This Function
+
+function movieThis(movie) {
+    axios.get("https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy").then(
+        function (response) {
+            if (response.data.Title != undefined) {
+                console.log("Title: " + response.data.Title);
+                console.log("Year: " + response.data.Year);
+                console.log("imdbRating: " + response.data.imdbRating);
+                console.log("RottenTomatoes: " + response.data.tomatoRating);
+                console.log("Country:: " + response.data.Country);
+                console.log("Language: " + response.data.Language);
+                console.log("Plot: " + response.data.Plot);
+                console.log("Actors: " + response.data.Actors);
+            }
+            else {
+                movieThis("Mr. Nobody");
+            }
+        }
+    ).catch(function (error) {
+        console.log(error);
+        return console.log("No Results found. If you haven't watched 'Mr. Nobody,' then you should. It's on Netflix");
+    });
+}
+
+// The Random
+
+function theRandom() {
+    fs.readFile("random.txt", "utf8", function (error, data) {
+        var dataArr = data.split(",");
+        spotifyThisSong(dataArr[1])
+        if (error) {
+            return console.log(error);
+        }
+    });
+}
