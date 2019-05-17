@@ -73,24 +73,11 @@ function spotifyThisSong(song) {
         });
 }
 
-function errorConditionForSpotify() {
-    spotify
-        .search({ type: 'track', query: 'The Sign' })
-        .then(function (response) {
-            for (var i = 0; i < response.tracks.items.length; i++) {
-                if (response.tracks.items[i].artists[0].name === "Ace of Base") {
-                    console.log("Artist: " + response.tracks.items[i].artist[0].name);
-                    console.log("Track: " + response.tracks.items[i].name);
-                    console.log("Preview URL: " + response.tracks.items[i].preview_url);
-                    console.log("Album: " + response.tracks.items[i].album.name);
-                    i = response.tracks.items.length;
-                }
-            }
-        }).catch(function (error) {
-            console.log(error);
-            console.log("No Results found. ");
-        });
-}
+
+
+
+
+
 
 // Movie This Function
 
