@@ -85,6 +85,7 @@ function movieThis(movie) {
     axios.get("https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy").then(
         function (response) {
             if (response.data.Title != undefined) {
+                console.log("\n***********************\n");
                 console.log("Title: " + response.data.Title);
                 console.log("Year: " + response.data.Year);
                 // console.log("imdbRating: " + response.data.imdbRating);
@@ -94,6 +95,8 @@ function movieThis(movie) {
                 console.log("Language: " + response.data.Language);
                 console.log("Plot: " + response.data.Plot);
                 console.log("Actors: " + response.data.Actors);
+
+
             }
             else {
                 movieThis("Mr. Nobody");
@@ -116,3 +119,6 @@ function theRandom() {
         }
     });
 }
+
+
+
