@@ -26,10 +26,10 @@ In this assignment, I created an app call LIRI. LIRI is like iPhone's SIRI. Howe
 
 ### What Each Command Should Do
 
-1. `node liri.js concert-this <artist/band name here>
+1. Concert-This
 
-2. `node liri.js spotify-this-song '<song name here>'`
+2. Sporify-This-Song
 
-3. `node liri.js movie-this '<movie name here>'`
+3. Movie-This
 
-4. `node liri.js do-what-it-says`
+4. Do-What-It-Says
