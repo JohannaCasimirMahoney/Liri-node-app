@@ -5,13 +5,15 @@ var request = require("request");
 var fs = require("fs");
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
+
+
 var spotify = new Spotify(keys.spotify);
 var moment = require('moment');
 var axios = require("axios");
 
 //vars to capture user inputs.
 var user = process.argv[2];
-var input = process.argv[3];
+var input = process.argv.splice(3).join(" ");
 
 switch (user) {
     case "concert-this":
@@ -30,6 +32,8 @@ switch (user) {
         theRandom();
         break;
 }
+
+
 
 // BandsInTown function
 
@@ -56,27 +60,23 @@ function searchForBandsInTown(artist) {
 // Spotify Function
 
 function spotifyThisSong(song) {
-    spotify
-        .search({ type: 'track', query: song })
-        .then(function (response) {
-            if (response.tracks.total === 0) {
-                errorConditionForSpotify();
-            } else {
-                console.log("Artist: " + response.tracks.items[0].artist[0].name);
-                console.log("Track: " + response.tracks.items[0].name);
-                console.log("Preview URL: " + response.tracks.items[0].preview_url);
-                console.log("Album: " + response.tracks.items[0].album.name);
-            }
-        }).catch(function (error) {
-            console.log(error);
-            console.log("No Results found. Showing results for 'The Sign' by Ace of Base");
-        });
+    console.log("song test", song)
+
+    spotify.search({ type: 'track', query: song }).then(function (response) {
+
+
+        for (var i = 0; i < response.tracks.items.length; i++) {
+
+            console.log("Artist: " + response.tracks.items[i].artists[0].name);
+            console.log("Track: " + response.tracks.items[i].name);
+            console.log("Preview URL: " + response.tracks.items[i].href);
+            console.log("Album: " + response.tracks.items[i].album.name);
+
+            console.log("\n***********************\n");
+        }
+
+    })
 }
-
-
-
-
-
 
 
 // Movie This Function
@@ -87,8 +87,9 @@ function movieThis(movie) {
             if (response.data.Title != undefined) {
                 console.log("Title: " + response.data.Title);
                 console.log("Year: " + response.data.Year);
-                console.log("imdbRating: " + response.data.imdbRating);
-                console.log("RottenTomatoes: " + response.data.tomatoRating);
+                // console.log("imdbRating: " + response.data.imdbRating);
+                console.log("Source", response.data.Ratings[1].Source);
+                console.log("Value", response.data.Ratings[1].Value);
                 console.log("Country:: " + response.data.Country);
                 console.log("Language: " + response.data.Language);
                 console.log("Plot: " + response.data.Plot);
